@@ -43,7 +43,7 @@ class Phrase{
              for(let letter of qwerty){
                 //console.log(letter.innerHTML);
                 //console.log(letterGuess);
-                console.log(numLetters);
+                //console.log(numLetters);
 
                  if(numLetters > 0  && letterGuess === letter.innerHTML){
                     letter.className = 'chosen';

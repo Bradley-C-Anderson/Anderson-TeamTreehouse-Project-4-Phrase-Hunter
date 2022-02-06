@@ -7,8 +7,12 @@
  const qwerty = document.getElementById('qwerty');
 
  startButton.addEventListener('click', (e) => {
+    game.resetGame();
     game.startGame();
+    //console.log(phraseLetters);
  });
+
+ 
 
 //  qwerty.addEventListener('click', (e) => {
 //     if(e.target.className === 'button'){
@@ -28,8 +32,8 @@
     //  }
     
 //Is this the callback that they want???
-qwerty.addEventListener('click', (e) =>{
-    console.log(e.target);
+qwerty.addEventListener('click', (e) => {
+    //console.log(e.target);
         game.handleInteraction(e.target);
 });
 
@@ -37,5 +41,4 @@ qwerty.addEventListener('click', (e) =>{
 * Handles onscreen keyboard button clicks
 * @param (HTMLButtonElement) button - The clicked button element
 */
-
 

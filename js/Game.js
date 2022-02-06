@@ -35,8 +35,8 @@ class Game{
         //console.log(this.activePhrase);
         //console.log(this.activePhrase.phrase.split(" ").join(""));
         let noSpaces = this.activePhrase.phrase.split(" ").join("");
-        console.log(phraseLetters.length);
-        console.log(noSpaces.length);
+        // console.log(phraseLetters.length);
+        // console.log(noSpaces.length);
         if(phraseLetters.length === noSpaces.length){ 
             return true;
         } else {
@@ -69,24 +69,46 @@ class Game{
     }
 
     handleInteraction(button){
-        console.log(button);
+        //console.log(button);
         if(button.className === 'key'){
             
             const letter = button.innerHTML;
             game.activePhrase.checkLetter(letter);
             
-            console.log(button.className);
+            //console.log(button.className);
             if(button.className === 'wrong'){
                 this.removeLife();
             }
             if(game.checkForWin()){
-                this.gameOver(game.checkForWin)
+                this.gameOver(game.checkForWin);
             } else {
-                console.log('No win yet');
+                //console.log('No win yet');
             }
         }
-        
-        
+    }
+
+    resetGame(){
+        const phraseLettersUL = document.getElementById('phrase').firstElementChild;
+        // console.log(phraseLettersUL);
+        // console.log(phraseLettersUL.hasChildNodes());
+        while(phraseLettersUL.hasChildNodes()){
+            phraseLettersUL.removeChild(phraseLettersUL.firstChild);
+        }
+
+        //reset keyboard
+        const keyButtons = qwerty.getElementsByTagName('button');
+        for(let key of keyButtons){
+            key.className = 'key';
+        }
+
+        const heartList = document.getElementsByClassName('tries');
+        //console.log(heartList);
+        for(let i = 0; i < heartList.length; i++){
+            let heart = heartList[i].firstElementChild;
+            heart.src = 'images/liveHeart.png';
+            heart.alt = 'Heart Icon';
+        }
+        this.misses = 0;
     }
 
 }//end of Game class
