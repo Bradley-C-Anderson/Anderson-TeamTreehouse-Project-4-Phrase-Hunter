@@ -29,20 +29,46 @@ class Phrase{
 
     checkLetter(letterGuess){
         const phraseLetters = document.getElementsByClassName('letter');
-        //let numLetters = 0;
+        let numLetters = 0;
         for(let letter of phraseLetters){
             if(letterGuess == letter.innerHTML){
                 // letter.classList.remove('hide');
                 // letter.classList.add('show');
                 this.showMatchedLetter(letter);
-                //numLetters++;
+                numLetters++;
             } 
         }
+        const qwerty = document.getElementsByClassName('key');
+        
+             for(let letter of qwerty){
+                //console.log(letter.innerHTML);
+                //console.log(letterGuess);
+                console.log(numLetters);
+
+                 if(numLetters > 0  && letterGuess === letter.innerHTML){
+                    letter.className = 'chosen';
+                 } else if (numLetters === 0 && letterGuess === letter.innerHTML){
+                    letter.className = 'wrong';
+                 }
+             }
+
+        // if(numLetters === 0){
+        //     const qwerty = document.getElementsByClassName('key');
+        //     for(let letter of qwerty){
+        //         if(letterGuess === letter.innerHTML){
+        //             letter.classList.add('wrong');
+        //         }
+        //     }
+        // }
     }
 
     showMatchedLetter(letter){
         letter.classList.remove('hide');
         letter.classList.add('show');
+    }
+
+    showWrongLetter(letter){
+
     }
 
     

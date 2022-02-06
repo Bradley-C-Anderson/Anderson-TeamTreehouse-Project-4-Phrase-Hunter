@@ -35,7 +35,8 @@ class Game{
         //console.log(this.activePhrase);
         //console.log(this.activePhrase.phrase.split(" ").join(""));
         let noSpaces = this.activePhrase.phrase.split(" ").join("");
-    
+        console.log(phraseLetters.length);
+        console.log(noSpaces.length);
         if(phraseLetters.length === noSpaces.length){ 
             return true;
         } else {
@@ -65,6 +66,27 @@ class Game{
             gameOverMessage.parentElement.className = 'lose';
         }
         document.getElementById('overlay').style.display = 'block';
+    }
+
+    handleInteraction(button){
+        console.log(button);
+        if(button.className === 'key'){
+            
+            const letter = button.innerHTML;
+            game.activePhrase.checkLetter(letter);
+            
+            console.log(button.className);
+            if(button.className === 'wrong'){
+                this.removeLife();
+            }
+            if(game.checkForWin()){
+                this.gameOver(game.checkForWin)
+            } else {
+                console.log('No win yet');
+            }
+        }
+        
+        
     }
 
 }//end of Game class
