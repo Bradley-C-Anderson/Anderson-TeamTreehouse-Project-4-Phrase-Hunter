@@ -20,30 +20,32 @@ class Game{
         const random = Math.floor(Math.random() * this.phrases.length);
         return this.phrases[random];
     }
-
+    /*
+    * Starts the game by getting a random phrase and adding it to the display
+    */
     startGame(){
         document.getElementById('overlay').style.display = 'none';
-        //document.getElementById('').style.display = 'block';
         this.activePhrase = this.getRandomPhrase();
         this.activePhrase.addPhraseToDisplay();
-
     }
-
+    /*
+    * Determines if the player wins.
+    * @return true if player wins, false if they haven't won yet.
+    */
     checkForWin(){
         let matchedCount = 0;
         const phraseLetters = document.getElementsByClassName('show');
-        //console.log(this.activePhrase);
-        //console.log(this.activePhrase.phrase.split(" ").join(""));
         let noSpaces = this.activePhrase.phrase.split(" ").join("");
-        // console.log(phraseLetters.length);
-        // console.log(noSpaces.length);
         if(phraseLetters.length === noSpaces.length){ 
             return true;
         } else {
             return false;
         }
     }
-
+    /*
+    * Removes a life if the letter guess is incorrect.
+    * When there are 5 incorrect guesses calls gameOver method.
+    */
     removeLife(){
         let wonGame = false;
         let heartList = document.getElementsByClassName('tries');
@@ -56,6 +58,10 @@ class Game{
         }
     }
 
+    /*
+    * Shows win message when game is won, lost message when game is lost.
+    * @param {boolean} True if game is won, false if game is lost
+    */
     gameOver(gameWon){
         const gameOverMessage = document.getElementById('game-over-message');
         if(gameWon){
@@ -68,29 +74,35 @@ class Game{
         document.getElementById('overlay').style.display = 'block';
     }
 
+    /*
+    * Handles interaction with the visual keyboard clicks. If the letter is wrong, removes life
+    * If player wins, calls the game over.
+    * @param {Object} Button object from the input keys
+    */
     handleInteraction(button){
-        //console.log(button);
         if(button.className === 'key'){
             
             const letter = button.innerHTML;
             game.activePhrase.checkLetter(letter);
             
-            //console.log(button.className);
             if(button.className === 'wrong'){
                 this.removeLife();
             }
             if(game.checkForWin()){
                 this.gameOver(game.checkForWin);
-            } else {
-                //console.log('No win yet');
-            }
+            } 
         }
     }
 
+    /*
+    * Removes letters from previous active phrase in the DOM.
+    * Reset keyboard classes to 'key'
+    * Reset heart images
+    * Reset the misses counter.
+    */
     resetGame(){
+        //remove previous phrase
         const phraseLettersUL = document.getElementById('phrase').firstElementChild;
-        // console.log(phraseLettersUL);
-        // console.log(phraseLettersUL.hasChildNodes());
         while(phraseLettersUL.hasChildNodes()){
             phraseLettersUL.removeChild(phraseLettersUL.firstChild);
         }
@@ -100,7 +112,7 @@ class Game{
         for(let key of keyButtons){
             key.className = 'key';
         }
-
+        //reset hearts
         const heartList = document.getElementsByClassName('tries');
         //console.log(heartList);
         for(let i = 0; i < heartList.length; i++){
@@ -108,6 +120,7 @@ class Game{
             heart.src = 'images/liveHeart.png';
             heart.alt = 'Heart Icon';
         }
+        //reset misses count
         this.misses = 0;
     }
 

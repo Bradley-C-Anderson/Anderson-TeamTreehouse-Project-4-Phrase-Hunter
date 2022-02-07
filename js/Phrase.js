@@ -7,10 +7,12 @@ class Phrase{
         this.phrase = phrase.toLowerCase();
     }
 
+    /*
+    * Adds the active phrase to the display.
+    * Creates list objects to add to the DOM
+    */
     addPhraseToDisplay(){
         const displayPhrase = document.getElementById('phrase').firstChild.nextSibling;
-        //console.log(displayPhrase.firstChild.nextSibling);
-        //<li class="hide letter h">h</li>
 
         for(let i = 0; i < this.phrase.length; i++){
             const letter = this.phrase.charAt(i);
@@ -27,6 +29,11 @@ class Phrase{
         }
     }
 
+    /*
+    * Will check the guessed letter and show it in the phrase if it is in it.
+    * Changes keyboard to make letters unable to be guess and changing the color to show letter has been played.
+    * @param {String} takes in the letter that is guessed.
+    */
     checkLetter(letterGuess){
         const phraseLetters = document.getElementsByClassName('letter');
         let numLetters = 0;
@@ -41,9 +48,6 @@ class Phrase{
         const qwerty = document.getElementsByClassName('key');
         
              for(let letter of qwerty){
-                //console.log(letter.innerHTML);
-                //console.log(letterGuess);
-                //console.log(numLetters);
 
                  if(numLetters > 0  && letterGuess === letter.innerHTML){
                     letter.className = 'chosen';
@@ -51,27 +55,16 @@ class Phrase{
                     letter.className = 'wrong';
                  }
              }
-
-        // if(numLetters === 0){
-        //     const qwerty = document.getElementsByClassName('key');
-        //     for(let letter of qwerty){
-        //         if(letterGuess === letter.innerHTML){
-        //             letter.classList.add('wrong');
-        //         }
-        //     }
-        // }
     }
+
+    /*
+    * Shows the letter in the phrase.
+    * @param {DOM Letter elements}
+    */
 
     showMatchedLetter(letter){
         letter.classList.remove('hide');
         letter.classList.add('show');
     }
-
-    showWrongLetter(letter){
-
-    }
-
-    
-
 
 }//end of Phrase class
